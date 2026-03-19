@@ -53,3 +53,5 @@ SDL -	[Sam Lantinga](https://github.com/slouken) - [Simple DirectMedia Layer Mai
 SeaBIOS - [Kevin O'Connor](https://github.com/KevinOConnor) - [SeaBIOS Main Website](https://www.seabios.org/) - [SeaBIOS GitHub (Read-Only Mirror)](https://github.com/coreboot/seabios)
 
 OpenBIOS - [The OpenBIOS Project](https://www.openbios.org/Credits.html) - [OpenBIOS Main Website](https://www.openbios.org/) - [OpenBIOS GitHub](https://github.com/openbios/openbios)
+
+Virtio-Win - [Virtio-Win GitHub](https://github.com/virtio-win)
