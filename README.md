@@ -49,3 +49,7 @@ Bochs - [The Bochs Project](https://sourceforge.net/p/bochs/_members/) - [Bochs 
 QEMU - [Fabrice Bellard](https://bellard.org/) - [QEMU Main Website](https://www.qemu.org/) - [QEMU GitHub Mirror](https://github.com/qemu/qemu)
 
 SDL -	[Sam Lantinga](https://github.com/slouken) - [Simple DirectMedia Layer Main Website](https://www.libsdl.org/) - [SDL GitHub](https://github.com/libsdl-org/SDL)
+
+SeaBIOS — Kevin O'Connor — [SeaBIOS Main Website](https://www.seabios.org/) — [SeaBIOS GitHub (Read-Only Mirror)](https://github.com/coreboot/seabios)
+
+OpenBIOS — The OpenBIOS Project[https://www.openbios.org/Credits.html] — [OpenBIOS Main Website](https://www.openbios.org/) — [OpenBIOS GitHub](https://github.com/openbios/openbios)
