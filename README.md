@@ -14,14 +14,14 @@ Aside from the baseline VirtualBox features, I am importing the features and bas
 ## What OS platforms are you targeting?
 I'm hoping to target all, but not limited to; Windows, macOS, Linux, Android, iOS, Windows Mobile, Xbox One.
 
-## What CPU architecture are you going to support.
+## What CPU architecture are you going to support?
 As many as I possibly can; x86-64 and x86 hosts is where this software will definitely shine, especially for use with hardware-assisted virtualization.
 However, it is my intention to have this software available on ARM64, RISC-V, ARM32, SPARC, MIPS, and PowerPC as well.
 
 ## Will it function the same as VirtualBox?
 It is my goal to have it functionally the same, but I must stress THIS IS NOT A SUCCESSOR TO ORACLE'S SOFTWARE. I have no authority on the project, therefore I must stress, if you have issues with this software, you submit issues, discussions, and trackers here, as opposed to unnecessarily bothering the developers behind VirtualBox.
 
-While it will definitely function the same as VirtualBox, it's my goal to specifically target the original VirtualBox 5.2 UI, and have the design language be mirrored across multiple different UI platforms, starting with QT as the base, and doing my best to mirror the UI across other languages, like XUL, HTML5, Win32 GDI, Java, Kotlin/Jetpack, and other such platforms.
+While it will definitely function the same as VirtualBox, it's my goal to specifically target the original VirtualBox 5.2 UI, and have the design language be mirrored across multiple different UI platforms, starting with QT as the base, and doing my best to mirror the UI across other languages, like XUL, HTML5, Win32 GDI, Java, Kotlin/Jetpack Compose, and other such platforms.
 
 In order to NOT infringe on Oracle's trade dress, I will be changing the icons, look-and-feel, and theme of LibreVMM, by utilizing the Humanity icons from Canonical to fill in the gaps where necessary.
 
