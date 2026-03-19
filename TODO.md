@@ -14,18 +14,22 @@
 
 | Repo | Role | Build System |
 |---|---|---|
-| `virtualbox/` | Core foundation | kBuild |
-| `qemu/` | TCG engine + device import | Meson |
-| `86Box/` | Legacy device import | CMake + vcpkg |
-| `Bochs/bochs/` | BIOS + device import | Autoconf |
-| `seabios/` | Firmware option | Kconfig/Makefile |
-| `openbios/` | Firmware option | Makefile/Kconfig |
-| `kvm-guest-drivers-windows/` | virtio Windows guest drivers | Pre-built binaries |
-| `roms/` | ROM image library | N/A |
-| `SDL/` | SDL2 backend | CMake |
-| `OpenGL-Registry/` | GL spec reference | N/A |
-| `dosbox-x/` | DOS cycle scaling + legacy hardware import | Autotools/CMake |
+| `/vendor/virtualbox/` | Core foundation | kBuild |
+| `/vendor/qemu/` | TCG engine + device import | Meson |
+| `/vendor/86Box/` | Legacy device import | CMake + vcpkg |
+| `/vendor/Bochs/bochs/` | BIOS + device import | Autoconf |
+| `/vendor/seabios/` | Firmware option | Kconfig/Makefile |
+| `/vendor/openbios/` | Firmware option | Makefile/Kconfig |
+| `/vendor/kvm-guest-drivers-windows/` | virtio Windows guest drivers | Windows DDK (Windows only) |
+| `/vendor/86Box/roms/` | ROM image library | N/A |
+| `/vendor/SDL/` | SDL2 backend | CMake |
+| `/vendor/dosbox-x/` | DOS cycle scaling "cycles=auto" + legacy hardware import | Autotools/CMake |
+| `/vendor/jdk/` | Java runtime | OpenJDK build system |
+| `/vendor/VirtualBox-5.2.44/` | UI design to copy from | kBuild |
+| `/vendor/VirtualBoxSDK-5.2.44-139111/` | VirtualBox 5.2 SDK | N/A |
+| `/vendor/VirtualBoxSDK-7.2.6-172322/` | VirtualBox 7.2 SDK | N/A |
 
+### These will not be committed to the Git Repository!
 ---
 
 ## Table of Contents
@@ -209,7 +213,7 @@
 
 ## Priority 5 — Platform-Agnostic UI
 
-> **Goal:** The UI frontend is a thin, replaceable layer over a stable backend API. Multiple UI implementations can coexist and target different platforms without changes to the core.
+> **Goal:** The UI frontend is a thin, replaceable layer over a stable backend API. Multiple UI implementations can coexist and target different platforms without changes to the core. UI must replicate functionality of existing 5.2 VirtualBox frontend under /vendor/VirtualBox-5.2.44/.
 
 ### 5.1 — Backend API (UI-Agnostic Core)
 
@@ -308,7 +312,7 @@
 
 ## Priority 8 — License & Compliance Tracking
 
-> **Goal:** Every component's license is tracked, conflicts are identified early, and distribution is legally clean.
+> **Goal:** Every component's license is tracked, conflicts are identified early, and distribution is legally clean. Recursively scan /vendor subdirectories for license and copying files, copy them to /LICENSES ensuring they are renamed accordingly to the content of the license/copying text.
 
 - [ ] Create a `LICENSES/` directory and populate it with the license text of every component. Key source files: `virtualbox/COPYING` (GPL3) + `virtualbox/COPYING.CDDL`, `qemu/COPYING` (GPL2) + `COPYING.LIB`, `86Box/COPYING` (GPL2), `Bochs/bochs/LICENSE` (LGPL2.1), `seabios/COPYING` + `COPYING.LESSER` (LGPL3+BSD), `openbios/COPYING` (GPL2), `dosbox-x/COPYING` (GPL2), `SDL/` (zlib).
 - [ ] Add author attributions to `COMPONENT_LICENSES.md` for: SeaBIOS (Kevin O'Connor) and OpenBIOS (The OpenBIOS Project, based on Open Firmware by Mitch Bradley).
