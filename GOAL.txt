@@ -1,7 +1,0 @@
-I'm trying to import features, modules, emulated/virtualized devices from QEMU, 86Box, and Bochs, to make VirtualBox a more well-rounded x86 virtualizer/emulator.
-
-I'm planning to import SeaBIOS, OpenBIOS, and the Bochs BIOS as well for additional compatibility.
-
-I'm specifically focusing on importing JUST the x86-64 and i386 emulation/virtualization features from QEMU.
-
-I also want to make sure that this version of VirtualBox is capable of running in restricted Windows userspaces (like a UWP environment on the Xbox One or Windows Mobile.), or on non-x86-64 platforms with emulation support from TCG and FEX-Emu.
