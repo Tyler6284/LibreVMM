@@ -5,3 +5,5 @@ My project is ambitious, and I won’t deny my naivety, but I am firm in my goal
 The more people who contribute to this, the less AI will be involved. I understand that AI is a sore point; I get it, trust me. But if no one else is willing to make the effort, I might as well do it myself. Since I have limited to near-non-existent knowledge about 'properly' coding, I’m hoping that as I vibe-code, I’ll begin to truly understand what I’m looking at. Perhaps eventually I’ll be able to stop relying on AI as my 'main coder' to integrate so many features into one codebase.
 
 If you can't handle me using AI to benefit my project, then you may not want to stick around. I understand the stigma, and I know there is a risk to using it for major projects—I know it can often break things that already work.
+
+That being said, if you ALSO use AI to contribute to this project, you must explicitly state you've used an AI model to code, as well was what model you used, otherwise your contribution will be turned down, and you will be temporarily prevented from contributing if you refuse to be honest.
