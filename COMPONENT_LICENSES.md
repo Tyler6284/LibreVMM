@@ -19,6 +19,11 @@ This document tracks the license information for all components used in LibreVMM
 - **Notes**: Some device emulations may have separate attributions
 - **Source**: 86Box repository
 
+### DOSBox-X
+- **License**: GPL-2.0
+- **Notes**: DOS cycle scaling and legacy hardware import source; see TODO backlog for scope
+- **Source**: DOSBox-X repository
+
 ### Bochs
 - **License**: LGPL-2.1
 - **Notes**: Bundles SeaBIOS 1.13.0 binaries
@@ -26,12 +31,12 @@ This document tracks the license information for all components used in LibreVMM
 
 ### SeaBIOS
 - **License**: LGPL-3.0+ or BSD-3-Clause
-- **Notes**: Dual-licensed
+- **Notes**: Dual-licensed; authored by Kevin O'Connor
 - **Source**: SeaBIOS repository
 
 ### OpenBIOS
 - **License**: GPL-2.0
-- **Notes**: 
+- **Notes**: Developed by The OpenBIOS Project, based on Open Firmware by Mitch Bradley
 - **Source**: OpenBIOS repository
 
 ### SDL2
@@ -91,6 +96,17 @@ All new files created by this project will follow the REUSE specification with S
 ## Audit Trail
 
 All license information is regularly audited to ensure compliance with distribution requirements.
+
+Key source license files per component:
+- `virtualbox/COPYING` (GPL-3.0) + `virtualbox/COPYING.CDDL`
+- `qemu/COPYING` (GPL-2.0) + `qemu/COPYING.LIB`
+- `86Box/COPYING` (GPL-2.0)
+- `Bochs/bochs/LICENSE` (LGPL-2.1)
+- `seabios/COPYING` + `seabios/COPYING.LESSER` (LGPL-3.0+ / BSD-3-Clause)
+- `openbios/COPYING` (GPL-2.0)
+- `dosbox-x/COPYING` (GPL-2.0)
+- `SDL/` (zlib)
+- `kvm-guest-drivers-windows/LICENSE`
 
 ## Next Steps
 

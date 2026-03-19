@@ -6,6 +6,7 @@ LibreVMM aims to build off the core VirtualBox virtualization platform with addi
 
 - **QEMU**: TCG execution engine and modern device models
 - **86Box**: Legacy device emulation for retro computing
+- **DOSBox-X**: Dynamic CPU cycle scaling and additional legacy hardware
 - **Bochs**: Interpreter-based execution for restricted environments
 - **SeaBIOS/OpenBIOS/Bochs BIOS**: Multiple firmware options for compatibility
 
@@ -47,22 +48,26 @@ The project uses a unified build system that integrates multiple subprojects:
 - **QEMU**: Meson
 - **86Box**: CMake + vcpkg
 - **Bochs**: Autoconf
-- **FEX-Emu**: CMake (Linux ARM64 only)
 
 ## Directory Structure
 
 ```
 LibreVMM/
-├── ARCHITECTURE.md                 # This file
-├── DEVICE_PORTING_GUIDE.md         # Guide for importing devices
-├── BUILD_GUIDE.md                  # Build instructions
-├── EXECUTION_BACKENDS.md           # Execution backend documentation
-├── GUEST_ADDITIONS_PORTING.md      # Guest Additions porting guide
-├── UI_FRONTEND_GUIDE.md            # UI frontend development guide
-├── KNOWN_INCOMPATIBILITIES.md      # Known device/chipset/BIOS incompatibilities
-├── COMPONENT_LICENSES.md           # License information for all components
-├── LICENSES/                       # Directory containing license text files
-└── TODO.md                         # Project TODO list
+├── .gitignore                          # Git ignore rules
+├── LICENSE                             # Project license (GPL-3.0)
+├── README.md                           # Project overview and author credits
+├── TRANSPARENCY.md                     # Vibe-code transparency statement
+├── CODE_OF_CONDUCT.md                  # Contributor code of conduct
+├── ARCHITECTURE.md                     # This file
+├── DEVICE_PORTING_GUIDE.md             # Guide for importing devices
+├── BUILD_GUIDE.md                      # Build instructions
+├── EXECUTION_BACKENDS.md               # Execution backend documentation
+├── GUEST_ADDITIONS_PORTING.md          # Guest Additions porting guide
+├── UI_FRONTEND_GUIDE.md                # UI frontend development guide
+├── KNOWN_INCOMPATIBILITIES.md          # Known device/chipset/BIOS incompatibilities
+├── COMPONENT_LICENSES.md               # License information for all components
+├── LICENSES/                           # Directory containing license text files
+└── TODO.md                             # Project TODO list
 ```
 
 ## Implementation Plan
