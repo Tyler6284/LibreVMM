@@ -37,8 +37,13 @@ This isn't going to be done in a day, and with my limited hardware and limited k
 
 # Authors of the projects used/referenced
 VirtualBox - Oracle - https://www.virtualbox.org/ - https://github.com/VirtualBox/virtualbox
+
 DOSBox-X - Jonathon Campbell - https://dosbox-x.com/ - https://github.com/joncampbell123/dosbox-x
+
 Bochs - https://sourceforge.net/p/bochs/_members/ - https://bochs.sourceforge.io/ - https://sourceforge.net/projects/bochs/
+
 86Box - Miran Grča - https://86box.net/ - https://github.com/86Box/86Box
+
 QEMU - Fabrice Bellard - https://www.qemu.org/ - https://github.com/qemu/qemu
+
 SDL -	Sam Lantinga - https://www.libsdl.org/ - https://github.com/libsdl-org/SDL
