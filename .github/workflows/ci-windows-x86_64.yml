@@ -1,0 +1,134 @@
+# =============================================================================
+# CI Pipeline for Windows x86_64
+# =============================================================================
+# Builds LibreVMM on Windows x86_64 using MinGW-w64
+# =============================================================================
+
+name: Windows x86_64
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - '**.c'
+      - '**.cpp'
+      - '**.h'
+      - '**.cmake'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - '.github/workflows/**'
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    env:
+      BUILD_PROFILE: desktop-full
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Checkout submodules
+        uses: actions/checkout@v4
+        with:
+          repository: librevmm/vendors
+          path: vendor
+          token: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+
+      - name: Install MSYS2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: |
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-ninja
+            mingw-w64-x86_64-meson
+            mingw-w64-x86_64-python-jinja2
+            mingw-w64-x86_64-libwinpthread-git
+            mingw-w64-x86_64-zlib
+            mingw-w64-x86_64-libpng
+            mingw-w64-x86_64-SDL2
+
+      - name: Configure
+        shell: msys2 {0}
+        run: |
+          cd /c/Projects/LibreVMM
+          cmake -B build -G Ninja -DBUILD_PROFILE=${{ env.BUILD_PROFILE }}
+
+      - name: Build
+        shell: msys2 {0}
+        run: |
+          cd /c/Projects/LibreVMM
+          cmake --build build -j${{ matrix.jobs }}
+
+      - name: Run Tests
+        shell: msys2 {0}
+        run: |
+          cd /c/Projects/LibreVMM
+          ctest --test-dir build --output-on-failure || true
+        continue-on-error: true
+
+      - name: Upload Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-x86_64-artifacts
+          path: |
+            build/**/*.exe
+            build/**/*.dll
+            build/**/*.lib
+            build/**/*.a
+          retention-days: 7
+
+  minimal-build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install MSYS2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: |
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-ninja
+            mingw-w64-x86_64-meson
+
+      - name: Configure (Minimal)
+        shell: msys2 {0}
+        run: |
+          cd /c/Projects/LibreVMM
+          cmake -B build -G Ninja -DBUILD_PROFILE=minimal
+
+      - name: Build (Minimal)
+        shell: msys2 {0}
+        run: |
+          cd /c/Projects/LibreVMM
+          cmake --build build -j2
+
+  build-matrix:
+    needs: [build, minimal-build]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Summary
+        run: |
+          echo "## Build Results" >> $GITHUB_STEP_SUMMARY
+          echo "- Windows x86_64 (full): ${{ needs.build.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Windows x86_64 (minimal): ${{ needs.minimal-build.result }}" >> $GITHUB_STEP_SUMMARY
+# Remember to compile drivers with Visual Studio and Windows DDK!

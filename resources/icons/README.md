@@ -1,0 +1,38 @@
+# LibreVMM Icons
+
+This directory is reserved for LibreVMM application icons.
+
+## Icon Requirements
+
+Per Priority 5.8 Trade Dress requirements:
+- **Required**: Replace the VirtualBox cube logo with a distinct LibreVMM application icon
+- Source from human-made, appropriately licensed artwork only
+- No AI-generated imagery
+- Must be visually distinct from the VirtualBox cube logo
+
+## Suggested Design Direction
+
+Options for a distinct visual identity:
+1. **Book/Stack icon** - Represents virtualization as opening new computing environments
+2. **Shield with V** - Security-focused virtualization
+3. **Hexagon with V** - Modern tech aesthetic
+4. **Open box** - Different from closed cube
+
+## Branding Guidelines
+
+- Primary icon: 256x256 PNG minimum
+- Include .svg source for scalability
+- Provide multiple sizes: 16, 32, 48, 64, 128, 256, 512
+- Dark and light theme variants
+- Avoid: Oracle blue (#0F6EBD), cube imagery, "VirtualBox" branding
+
+## License
+
+Icons must be:
+- Original artwork or properly licensed
+- Compatible with GPLv3 distribution
+- Include source files in this directory
+
+## Placeholder
+
+This directory is currently empty - icons will be added before first release.

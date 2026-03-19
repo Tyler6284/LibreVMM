@@ -12,7 +12,7 @@ It's meant to be a well-rounded x86 and x86-64 virtualizer/emulator for a multit
 Aside from the baseline VirtualBox features, I am importing the features and basic mechanics from QEMU, 86Box, DOSBox-X, and Bochs. Down to their emulated/virtual hardware for virtual machines.
 
 ## What OS platforms are you targeting?
-I'm hoping to target all, but not limited to; Windows, macOS, Linux, Android, iOS, Windows Mobile, Xbox One.
+I'm hoping to target all, but not limited to; Windows, macOS, Linux, Android, iOS, Windows Mobile, Xbox One, Haiku/BeOS, *BSD, OpenIndiana. (I will ensure that this software can be ported to other platforms not within my current scope.)
 
 ## What CPU architecture are you going to support?
 As many as I possibly can; x86-64 and x86 hosts is where this software will definitely shine, especially for use with hardware-assisted virtualization.

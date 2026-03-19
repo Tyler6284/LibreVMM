@@ -39,6 +39,9 @@
 3. [Priority 3 — Guest Additions Expansion](#priority-3--guest-additions-expansion)
 4. [Priority 4 — Remove VM Execution Restrictions](#priority-4--remove-vm-execution-restrictions)
 5. [Priority 5 — Platform-Agnostic UI](#priority-5--platform-agnostic-ui)
+   - [5.9 — *BSD Frontend](#59---bsd-frontend-freebsd-netbsd-openbsd)
+   - [5.10 — Haiku/BeOS Frontend](#510--haikubeos-frontend)
+   - [5.11 — OpenIndiana / illumos Frontend](#511--openindiana--illumos-frontend)
 6. [Priority 6 — Firmware & BIOS Options](#priority-6--firmware--bios-options)
 7. [Priority 7 — Build System Unification](#priority-7--build-system-unification)
 8. [Priority 8 — License & Compliance Tracking](#priority-8--license--compliance-tracking)
@@ -169,11 +172,13 @@
 ### 3.2 — Legacy and Alternative Linux/Unix Guest Additions
 
 - [ ] Test and repair Guest Additions for Linux kernel versions 2.4.x and 2.6.x.
-- [ ] Port or adapt Guest Additions for FreeBSD, NetBSD, OpenBSD.
+- [ ] Port or adapt Guest Additions for FreeBSD, NetBSD, OpenBSD. Note: these are also targeted host platforms (see Priority 5.9) — a working Guest Additions port is a prerequisite for validating the *BSD host build path via self-hosted VMs.
 - [ ] Port Guest Additions for OS/2 (eComStation / ArcaOS) — basic display and shared folders.
 - [ ] Evaluate feasibility of minimal Guest Additions for DOS (VESA display, shared folder via INT, mouse integration via PS/2).
 - [ ] Port virtio drivers and SPICE guest drivers to Linux, FreeBSD, and OS/2 targets where feasible.
 - [ ] Evaluate ReactOS Guest Additions — bring to parity with NT 4.0 level.
+- [ ] Port or adapt Guest Additions for Haiku (x86_64) — display, mouse integration, and shared folders. Haiku's driver model uses a kernel add-on (.ko) architecture distinct from both Linux and BSD; reference the existing BeOS R5 compatibility layer where applicable. See also Priority 5.10.
+- [ ] Port or adapt Guest Additions for OpenIndiana/illumos (x86_64) — display and shared folders at minimum. illumos uses a SVR4/SunOS driver model; reference the historical Solaris Guest Additions code in the VirtualBox tree (`src/VBox/Additions/solaris/`) as a starting point. See also Priority 5.11.
 
 ### 3.3 — Guest Additions Architecture
 - [ ] Decouple Guest Additions components so each (display driver, mouse, shared folders, clipboard, drag-and-drop, time sync) can be installed independently.
@@ -274,6 +279,43 @@
 - [ ] **Required — branded icon audit and replacement:** Audit `src/VBox/Frontends/VirtualBox/images/` for any icon that contains the VirtualBox cube logo or the word "VirtualBox." Replace these before distribution. Generic functional icons (directional arrows, play/pause glyphs, hardware device icons) are covered by the GPLv3 and may be used as-is. (See also Priority 8 icon audit item.)
 - [ ] **README and About dialog disclaimer:** Ensure the following text (or equivalent) appears in `README.md` and the About dialog at all times: *"LibreVMM is a fork of the VirtualBox® base package. VirtualBox is a registered trademark of Oracle Corporation. LibreVMM is not affiliated with, endorsed by, or sponsored by Oracle Corporation."*
 
+### 5.9 — *BSD Frontend (FreeBSD, NetBSD, OpenBSD)
+
+> FreeBSD, NetBSD, and OpenBSD are targeted as first-class host platforms. The Qt frontend already builds on these systems given the right dependencies, so the primary work here is validating that build path and addressing any BSD-specific API divergences. NetBSD's explicit portability mandate makes it the natural vehicle for exotic host architectures (SPARC, MIPS, PowerPC) if host support on those ISAs is ever pursued.
+
+- [ ] Validate that the Qt frontend builds and runs correctly on FreeBSD (x86_64 and ARM64 as primary targets).
+- [ ] Validate Qt frontend build on NetBSD and OpenBSD x86_64; document any dependency differences from the FreeBSD path.
+- [ ] Audit `virtualbox/src/VBox/` for any Linux-specific kernel or userspace API calls that do not have a BSD equivalent — replace or `#ifdef`-guard each instance.
+- [ ] Ensure the VirtualBox kernel module (`vboxdrv`) builds on FreeBSD's kernel module infrastructure (`.ko` via `kld`). Reference the existing `src/VBox/HostDrivers/Support/freebsd/` path in the VirtualBox tree.
+- [ ] Confirm audio backend availability on *BSD: OSS is universally available; evaluate PulseAudio/PipeWire availability per distro and gate accordingly.
+- [ ] Add `freebsd-x86_64`, `netbsd-x86_64`, and `openbsd-x86_64` build profiles to the build system (see Priority 7).
+- [ ] Add FreeBSD x86_64 to the CI pipeline.
+- [ ] Scope: same functional parity as the Linux Qt frontend — full VM management, device configuration, execution, display.
+
+### 5.10 — Haiku/BeOS Frontend
+
+> Haiku is a first-class desktop OS target with an active community that would benefit directly from a working VMM. It runs on x86_64 with an ARM64 port in progress. The Haiku API (BeAPI) is C++ and well-documented. The most practical frontend strategy is the Qt frontend, as Qt has a Haiku port, supplemented by a native BeAPI frontend if Qt proves impractical.
+
+- [ ] Evaluate whether the Qt port for Haiku is sufficiently stable to carry the full Qt frontend. If yes, validate and fix the Qt frontend build on Haiku x86_64.
+- [ ] If Qt on Haiku is insufficient, design a minimal native BeAPI frontend implementing the `IVBoxFrontend` API — scope: VM creation wizard, basic device configuration, start/stop/pause, display output, snapshot list.
+- [ ] Audit `virtualbox/src/VBox/` for POSIX assumptions that are not satisfied by Haiku's POSIX compatibility layer — Haiku is largely POSIX-compliant but has known gaps in threading and signal handling.
+- [ ] Evaluate feasibility of the VirtualBox kernel driver on Haiku. Haiku's kernel add-on model differs significantly from Linux and BSD; a kernel-level driver may not be achievable in the short term. Document as a known limitation and fall back to TCG-only execution on Haiku hosts until resolved.
+- [ ] Confirm audio backend on Haiku: Haiku has its own Media Kit audio API; evaluate whether an SDL audio backend via the Haiku SDL port covers this adequately.
+- [ ] Add `haiku-x86_64` build profile to the build system (see Priority 7).
+- [ ] Scope: x86_64 host as the initial target; ARM64 host to follow once the Haiku ARM64 port matures.
+
+### 5.11 — OpenIndiana / illumos Frontend
+
+> OpenIndiana (illumos kernel) is the primary open-source continuation of OpenSolaris and the most relevant target for SPARC-adjacent workloads. It runs on x86_64 in practice, with SPARC support existing in downstream illumos forks (SmartOS, OmniOS). The VirtualBox tree already contains a historical Solaris frontend and driver path, making this the lowest-effort exotic platform addition.
+
+- [ ] Audit and repair the existing Solaris/illumos build path in `virtualbox/src/VBox/` — much of the infrastructure already exists from Oracle's Solaris VirtualBox port.
+- [ ] Validate that the Qt frontend builds on OpenIndiana x86_64 using the system Qt packages or a locally built Qt.
+- [ ] Confirm that the VirtualBox kernel module builds against the illumos kernel (`/usr/src/uts/`) using the existing `src/VBox/HostDrivers/Support/solaris/` driver path.
+- [ ] Confirm audio backend on illumos: OSS and PulseAudio are both available on OpenIndiana; gate by detection.
+- [ ] Evaluate SPARC host support via downstream illumos forks — document as a long-term research item; do not block x86_64 illumos support on it.
+- [ ] Add `openindiana-x86_64` build profile to the build system (see Priority 7).
+- [ ] Scope: x86_64 host as the initial and primary target; SPARC host is a long-term research item.
+
 ---
 
 ## Priority 6 — Firmware & BIOS Options
@@ -302,11 +344,11 @@
 - [ ] Integrate `seabios/` Makefile/Kconfig build as a subproject producing BIOS binary only.
 - [ ] Integrate `openbios/` Makefile/Kconfig build as a subproject producing BIOS binary (amd64 target) only.
 - [ ] Integrate `SDL/` as a shared dependency for QEMU SDL backends and the platform UI layer.
-- [ ] Create build profiles for: `desktop-full`, `desktop-nogui`, `uwp-restricted`, `android`, `ios`, `headless-server`.
+- [ ] Create build profiles for: `desktop-full`, `desktop-nogui`, `uwp-restricted`, `android`, `ios`, `headless-server`, `freebsd-x86_64`, `netbsd-x86_64`, `openbsd-x86_64`, `haiku-x86_64`, `openindiana-x86_64`.
 - [ ] Define a clear `VBOX_EXT_DEVICES_DIR` that device modules are compiled into and loaded from at runtime.
 - [ ] Ensure all imported subprojects can be built without their own main executables (library-mode builds only).
-- [ ] Create CI pipeline definitions for: Windows x86_64, Linux x86_64, Linux ARM64, Windows ARM64. Reference the existing CI configs in `86Box/.ci/` (Jenkins + GitHub Actions) and `qemu/.gitlab-ci.d/` for platform-specific dependency lists.
-- [ ] Define a minimal build (core + TCG + one BIOS + no GUI) as a smoke-test target.
+- [ ] Create CI pipeline definitions for: Windows x86_64, Linux x86_64, Linux ARM64, Windows ARM64, FreeBSD x86_64. Reference the existing CI configs in `86Box/.ci/` (Jenkins + GitHub Actions) and `qemu/.gitlab-ci.d/` for platform-specific dependency lists. NetBSD, OpenBSD, Haiku, and OpenIndiana CI can follow once their build profiles are validated locally.
+- [ ] Define a minimal build (core + TCG + one BIOS + no GUI) as a smoke-test target applicable to all host platforms including *BSD, Haiku, and OpenIndiana.
 
 ---
 
