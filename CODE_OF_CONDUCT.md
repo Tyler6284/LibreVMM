@@ -72,7 +72,3 @@ LibreVMM is built on the belief that good software comes from good communities. 
 If you are here to dominate, gatekeep, or demean — this is not the project for you.
 
 *This Code of Conduct is a living document and may be revised as the project grows.*
-
----
-
-*LibreVMM — Free as in freedom. Free as in dignity.*
