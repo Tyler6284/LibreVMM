@@ -113,9 +113,9 @@ declare -a VENDOR_REPOS=(
     "kvm-guest-drivers-windows|https://github.com/virtio-win/kvm-guest-drivers-windows.git|main"
     "SDL|https://github.com/libsdl-org/SDL.git|main"
     "dosbox-x|https://github.com/joncampbell123/dosbox-x.git|master"
+    "jdk|https://github.com/openjdk/jdk.git|master"
 )
 
-# Note: JDK is typically downloaded as a pre-built binary, not cloned
 # Note: VirtualBox SDKs and VirtualBox-5.2.44 are special - they may need manual download
 # Note: 86Box/roms is a separate repository
 
@@ -159,11 +159,10 @@ done
 log_info "Setting up 86Box ROMs..."
 clone_or_update "$VENDOR_DIR/86Box/roms" "https://github.com/86Box/roms.git" "master"
 
-# JDK - Download instead of clone (pre-built binaries)
+# JDK - Clone
 log_info ""
-log_warn "JDK setup: Download OpenJDK from https://adoptium.net/ or https://github.com/adoptium/temurinXX.X-binaries/releases"
+log_warn "JDK setup: Download OpenJDK https://github.com/openjdk/jdk.git" "master"
 log_warn "Extract to: $VENDOR_DIR/jdk/"
-log_info "Recommended: temurin-21-linux-x64.tar.gz or temurin-21-windows-x64.zip"
 
 # VirtualBox SDKs - Manual download required
 log_info ""
