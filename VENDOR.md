@@ -58,9 +58,8 @@ Some components require manual download due to licensing or binary distribution:
 - **5.2.44**: https://download.virtualbox.org/virtualbox/5.2.44/VirtualBoxSDK-5.2.44-139111.zip → `vendor/VirtualBoxSDK-5.2.44-139111/`
 - **7.2.6**: https://download.virtualbox.org/virtualbox/7.2.6/VirtualBoxSDK-7.2.6-172322.zip → `vendor/VirtualBoxSDK-7.2.6-172322/`
 
-### JDK (Java Runtime)
-Download from https://adoptium.net/ or https://github.com/adoptium/temurinXX.X-binaries/releases
-- Recommended: OpenJDK 21 (temurin-21)
+### JDK 
+Download from https://github.com/openjdk/jdk
 - Extract to: `vendor/jdk/`
 
 ## Component Details
