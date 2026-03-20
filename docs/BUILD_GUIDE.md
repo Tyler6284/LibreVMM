@@ -274,7 +274,7 @@ cmake -B build-win-arm32 \
 cmake --build build-win-arm32 -j$(nproc)
 ```
 
-Note: Windows ARM32 builds are primarily for Windows on ARM tablets and the Windows 10X emulator. For most use cases, prefer x86_64 or ARM64 builds.
+Note: Windows ARM32 builds are primarily for Windows RT, Windows 10 Mobile, and early Windows 10 desktop builds. For most use cases, prefer x86_64 or ARM64 builds.
 
 ### macOS
 
