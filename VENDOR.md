@@ -96,6 +96,6 @@ These vendor directories are integrated into the LibreVMM build system as docume
 ## Notes
 
 - The `/vendor/` directory is excluded from version control per the TODO.md specification
-- Do not commit vendor code to the LibreVMM repository
+- **DO NOT COMMIT VENDOR CODE TO LIBREVMM REPOSITORY!!!**
 - Always respect upstream licenses when modifying or redistributing vendor components
 - Run `scripts/setup-vendors.sh` after cloning the repository to populate vendor directories
