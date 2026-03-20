@@ -82,7 +82,7 @@ Download from https://github.com/openjdk/jdk
 
 Each vendor component has its own license. See the [LICENSES](../LICENSES/) directory for aggregated license texts, and refer to each vendor's `COPYING`, `LICENSE`, or `COPYING.*` file for details.
 
-Key license considerations:
+Key license considerations, including, but not limited to:
 - **VirtualBox**: Dual licensed under GPLv3 and CDDL. Components are separated accordingly.
 - **QEMU**: GPLv2, with some components under COPYING.LIB (LGPLv2.1)
 - **SeaBIOS**: LGPLv3 + BSD
