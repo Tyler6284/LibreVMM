@@ -87,11 +87,12 @@ LibreVMM supports the following build profiles:
 
 | Profile | Description | GUI | TCG | HM |
 |---------|-------------|-----|-----|-----|
-| `desktop-full` | Full desktop with Qt GUI | ✓ | ✓ | ✓ |
+| `desktop-full` | Full desktop with Qt GUI (Multi-platform) | ✓ | ✓ | ✓ |
+| `desktop-gdi` | Full desktop with Win32 GUI (Windows only) | ✓ | ✓ | ✓ |
 | `desktop-nogui` | Desktop without GUI | ✗ | ✓ | ✓ |
-| `uwp-restricted` | UWP sandbox build | ✓ | Interpreter only | ✗ |
-| `android` | Android build | ✗ | Interpreter only | ✗ |
-| `ios` | iOS build (no JIT) | ✗ | Interpreter only | ✗ |
+| `uwp` | UWP sandbox build | ✓ | Depends on platform | Depends on platform |
+| `android` | Android build | Mobile | Interpreter only | ✗ |
+| `ios` | iOS build | Mobile | Interpreter only (unless JIT enabled)| Requires Apple Hypervisor to be enabled. |
 | `headless-server` | Server without GUI | ✗ | ✓ | ✓ |
 | `minimal` | Smoke test build | ✗ | ✓ | ✗ |
 
